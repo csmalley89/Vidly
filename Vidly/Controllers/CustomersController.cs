@@ -65,6 +65,14 @@ namespace Vidly.Controllers
    
         }
 
+        public ActionResult Delete(int id)
+        {
+            var customer = _context.Customers.FirstOrDefault(e => e.Id == id);
+            _context.Customers.Remove(customer);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Customers");
+        }
+
         public ViewResult Index()
         {
             var customers = _context.Customers.Include(c => c.MembershipType).ToList();
